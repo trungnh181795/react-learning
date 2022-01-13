@@ -15,6 +15,12 @@ const JobInput = (props) => {
     });
 
 
+    // const [title, setTitle] = useState('');
+    // const [detail, setDetail] = useState('');
+    // const [day, setDay] = useState('');
+    // const [time, setTime] = useState('');
+
+
     const handleInputChange = (e) => {
         let inputValue = e.target.value;
         let inputName = e.target.name;
@@ -25,18 +31,32 @@ const JobInput = (props) => {
         })
     }
 
+    // const changeTitleHandler = (e) => {
+    //     setTitle(e.target.value)
+    // }
+    // const changeDetailHandler = (e) => {
+    //     setDetail(e.target.value)
+    // }
+    // const changeDayHandler = (e) => {
+    //     setDay(e.target.value)
+    // }
+    // const changeTimeHandler = (e) => {
+    //     setTime(e.target.value)
+    // }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setInputJob((prev) => {
-            let {createdAt: {createdDay, createdTime},...keys} = prev;
-            let currentTime = new Date();
-            createdDay = currentTime.toDateString();
-            createdTime = currentTime.toLocaleTimeString();
+        let {createdAt: {createdDay, createdTime},...keys} = inputJob;
+        createdDay = new Date().toDateString();
+        createdTime = new Date().toLocaleDateString();
+        props.submitNewJob({...keys, createdAt: {createdDay, createdTime}})
 
-            return {...keys, createdAt: {createdDay, createdTime}}
-        })
-        console.log('called in handleSubmit', inputJob)
-        props.submitNewJob(inputJob)
+
+        // props.submitNewJob({title, detail, day, time, createdAt: {
+        //     createdDay: new Date().toDateString(),
+        //     createdTime: new Date().toLocaleDateString()
+        // }})
+        
     }
 
     return (
@@ -48,28 +68,38 @@ const JobInput = (props) => {
                     id="Title" 
                     name="title" 
                     value={inputJob.title}
+                    // value={title}
                     onChange={handleInputChange}
+                    // onChange={changeTitleHandler}
                 /><br/>
                 <label htmlFor="Detail">Detail</label>
                 <input 
                     type="text" 
                     id="Detail" 
                     name="detail" 
-                    onChange={handleInputChange}
+                    // value={detail}
+                    // onChange={handleInputChange}
+                    // onChange={changeDetailHandler}
                 /><br/>
                 <label htmlFor="Day">Day</label>
                 <input 
                     type="date" 
                     id="Day" 
-                    name="day"       
-                    onChange={handleInputChange}        
+                    name="day"  
+                    value={inputJob.day}
+                    // value={day}     
+                    onChange={handleInputChange}
+                    // onChange={changeDayHandler}        
                 /><br/>
                 <label htmlFor="Time">Time</label>
                 <input 
                     type="time" 
                     id="Time" 
-                    name="time"        
+                    name="time"  
+                    value={inputJob.time}
+                    // value={time}      
                     onChange={handleInputChange}
+                    // onChange={changeTimeHandler}
                 /><br/>
                 <input type="submit" value="Add"/>
             </form>
