@@ -8,10 +8,12 @@ const JobInput = (props) => {
         day: '',
         time: '',
         isChecked: false,
-        createdAt: ''
+        createdAt: {
+            createdDay: '',
+            createdTime: ''
+        }
     });
 
-    console.log(inputJob)
 
     const handleInputChange = (e) => {
         let inputValue = e.target.value;
@@ -26,12 +28,14 @@ const JobInput = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setInputJob((prev) => {
-            let currentInputJob = {...prev};
-            console.log('currentInputJob',currentInputJob)
-            currentInputJob.createdAt = new Date().toString();
+            let {createdAt: {createdDay, createdTime},...keys} = prev;
+            let currentTime = new Date();
+            createdDay = currentTime.toDateString();
+            createdTime = currentTime.toLocaleTimeString();
 
-            return currentInputJob
+            return {...keys, createdAt: {createdDay, createdTime}}
         })
+        console.log('called in handleSubmit', inputJob)
         props.submitNewJob(inputJob)
     }
 
