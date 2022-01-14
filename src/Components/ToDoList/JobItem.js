@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import JobItemDetail from './JobItemDetail'
 
 const JobItem = (props) => {
+    let {title, isDone, ...key} = props.job;
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -16,27 +17,36 @@ const JobItem = (props) => {
         props.onDelete(props.job) 
     }
 
-    const handleSetShowDetail = () => {
+    const handleSetShowDetail = (e) => {
         setShowDetail(!showDetail);
+        console.log(e.target)
     }
     console.log('called in JobItem', props.job)
 
     return (
-        <li className='JobItem' onClick={handleSetShowDetail}>
+        <li className='JobItem'>
             <div className='JobItem-Title'>
+                <button 
+                    className="item-dropdown me-2"
+                    onClick={(e) => handleSetShowDetail(e)}
+                >
+                    <i className="arrow-down"></i>
+                </button>
                 <input
-                    className='item-checkbox'
+                    className='item-checkbox me-2'
                     type='checkbox'
+                    checked={isDone}
                     onChange={handleCheckBoxChange}
                 />
-                <p 
-                    className='item-text'
+                <div 
+                    className='item-text me-2'
                     style={{'textDecoration': isChecked ? 'line-through' : 'none'}}
                 >
-                    {props.job.title}
-                </p>
+                    {title}
+                </div>
                 <button 
-                    className='item-delete-button'
+                    className='btn btn-danger item-delete-button'
+                    type="button"
                     onClick={handleButtonOnClick}
                 >
                     Delete

@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import './App.scss';
 import Header from './Components/Layout/Header';
@@ -22,10 +23,8 @@ function App() {
 
   return (
     <div className="App">
-      
       <Header />
       <Content />
-      
     </div>
   );
 }

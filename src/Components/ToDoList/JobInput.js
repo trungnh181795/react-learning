@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 
+
 const JobInput = (props) => {
 
     const [inputJob, setInputJob] = useState({
@@ -7,19 +8,12 @@ const JobInput = (props) => {
         detail: '',
         day: '',
         time: '',
-        isChecked: false,
+        isDone: false,
         createdAt: {
             createdDay: '',
             createdTime: ''
         }
     });
-
-
-    // const [title, setTitle] = useState('');
-    // const [detail, setDetail] = useState('');
-    // const [day, setDay] = useState('');
-    // const [time, setTime] = useState('');
-
 
     const handleInputChange = (e) => {
         let inputValue = e.target.value;
@@ -31,78 +25,106 @@ const JobInput = (props) => {
         })
     }
 
-    // const changeTitleHandler = (e) => {
-    //     setTitle(e.target.value)
-    // }
-    // const changeDetailHandler = (e) => {
-    //     setDetail(e.target.value)
-    // }
-    // const changeDayHandler = (e) => {
-    //     setDay(e.target.value)
-    // }
-    // const changeTimeHandler = (e) => {
-    //     setTime(e.target.value)
-    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let {createdAt: {createdDay, createdTime},...keys} = inputJob;
-        createdDay = new Date().toDateString();
-        createdTime = new Date().toLocaleDateString();
+        createdDay = new Date().toLocaleDateString();
+        createdTime = new Date().toLocaleTimeString();
+        console.log('createdTime', createdTime)
         props.submitNewJob({...keys, createdAt: {createdDay, createdTime}})
-
-
-        // props.submitNewJob({title, detail, day, time, createdAt: {
-        //     createdDay: new Date().toDateString(),
-        //     createdTime: new Date().toLocaleDateString()
-        // }})
         
     }
 
     return (
-        <div className="JobInput">
-            <form className="job-input-form" onSubmit={handleSubmit}>
-                <label htmlFor="Title">Title</label>
-                <input 
-                    type="text" 
-                    id="Title" 
-                    name="title" 
-                    value={inputJob.title}
-                    // value={title}
-                    onChange={handleInputChange}
-                    // onChange={changeTitleHandler}
-                /><br/>
-                <label htmlFor="Detail">Detail</label>
-                <input 
-                    type="text" 
-                    id="Detail" 
-                    name="detail" 
-                    // value={detail}
-                    // onChange={handleInputChange}
-                    // onChange={changeDetailHandler}
-                /><br/>
-                <label htmlFor="Day">Day</label>
-                <input 
-                    type="date" 
-                    id="Day" 
-                    name="day"  
-                    value={inputJob.day}
-                    // value={day}     
-                    onChange={handleInputChange}
-                    // onChange={changeDayHandler}        
-                /><br/>
-                <label htmlFor="Time">Time</label>
-                <input 
-                    type="time" 
-                    id="Time" 
-                    name="time"  
-                    value={inputJob.time}
-                    // value={time}      
-                    onChange={handleInputChange}
-                    // onChange={changeTimeHandler}
-                /><br/>
-                <input type="submit" value="Add"/>
-            </form>
+        <div className="JobInput mb-2">
+            <div className="container-fluid">
+                <div className="job-input-header">Insert a new job</div>
+                <form className="job-input-form" onSubmit={handleSubmit}>
+                    <div className="row">
+                        <div className="col-12">
+                            <label 
+                                className="form-label custom-label"
+                                htmlFor="Title"
+                            >
+                                Title
+                            </label>
+                            <input 
+                                className="form-control"
+                                type="text" 
+                                id="Title" 
+                                name="title" 
+                                value={inputJob.title}
+                                onChange={handleInputChange}
+                                required
+                            /><br/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <label 
+                                className="form-label custom-label"
+                                htmlFor="Detail"                              
+                            >
+                                Detail
+                            </label>
+                            <textarea 
+                                className="form-control"
+                                type="text" 
+                                id="Detail" 
+                                name="detail" 
+                                value={inputJob.detail}
+                                style={{resize: 'none'}}
+                                onChange={handleInputChange} 
+                            /><br/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-6"> 
+                            <label 
+                                className="form-label custom-label"
+                                htmlFor="Day"
+                            >
+                                Remind me on a day
+                            </label>
+                            <input 
+                                className="form-control"
+                                type="date" 
+                                id="Day" 
+                                name="day"  
+                                value={inputJob.day}  
+                                onChange={handleInputChange}       
+                            /><br/>
+                        </div>
+                        <div className="col-6">
+                            <label 
+                                className="form-label custom-label"
+                                htmlFor="Time"
+                            >
+                                Alarm
+                            </label>
+                            <input 
+                                className="form-control"
+                                type="time" 
+                                id="Time" 
+                                name="time"  
+                                value={inputJob.time}      
+                                onChange={handleInputChange}
+                            /><br/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12 d-grid">
+                            <button 
+                                className="btn btn-primary"
+                                type="submit"
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>               
         </div>
     )   
 }

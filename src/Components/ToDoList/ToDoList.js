@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import JobsList from './JobsList';
+import UndoneJobsList from './UndoneJobsList';
 import JobInput from './JobInput';
 
 import './ToDoList.scss';
@@ -17,6 +17,7 @@ const ToDoList = () => {
         
         return result ?? []
     });
+
 
     console.log(jobs)
 
@@ -49,7 +50,7 @@ const ToDoList = () => {
         <div className='ToDoList'>
 
             <JobInput submitNewJob={createNewJob}/>
-            <JobsList 
+            <UndoneJobsList 
                 jobs={jobs}
                 clearJobDone={removeJobFromList}
             />

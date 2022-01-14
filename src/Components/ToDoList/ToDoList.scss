@@ -3,7 +3,7 @@
     height: auto;
     margin-top: 20px !important;
     margin: auto;
-    border: 2px solid #000000;
+    border: 3px solid #000000;
     border-radius: 5px;
     padding: 20px;
 
@@ -14,18 +14,47 @@
     .JobInput {
       width: 100%;
       margin: 0;
+      border: 2px solid #000000;
+      border-radius: 5px;
+      padding:  10px 5px ;
       
+      .job-input-header {
+        font-size: x-large;
+        font-weight: bold;
+      }
+
+      .job-input-form {
+        margin: 0;
+        
+        .custom-label {
+          width: 100%;
+          text-align: start;
+        
+        }
+      }
+
 
     }
 
     .JobsList {
       list-style-type: none;
-      padding: 0;
+      width: 100%;
+      margin: 0;
+      border: 2px solid #000000;
+      border-radius: 5px;
+      padding:  10px 15px;
+
+      .JobsHeader {
+        font-size: x-large;
+        font-weight: bold;
+      }
 
       .JobItem {
+        width: 100%;
+        height: auto;
         border: 1px solid #000000;
         border-radius: 5px;
-        padding: 0 10px 0 10px;
+        padding: 5px;
         margin: 5px 0 5px 0;
         cursor: pointer;
         &:hover {
@@ -34,32 +63,63 @@
 
         .JobItem-Title {
           display: flex;
+          width: 100%;
+          height: auto;
           justify-content: space-between;
           align-items: center;
-        }
 
-        .item-checkbox {
-          width: 20px;
-          height: 20px;
-        }
+          .item-dropdown {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
 
-        .item-text {
-          width: 300px;
-          text-align: start;
-        }
-        
-        .item-delete-button {
-          background-color: #E74C3C ;
-          color: #ffffff;
-          border: 1px solid #ffffff;
-          border-radius: 5px;
-          width: 50px;
-          height: 30px;
-          cursor: pointer;
-          &:hover {
-            background-color: #C0392B;
+            .arrow-down {
+              border: solid black;
+              border-width: 0 3px 3px 0;
+              display: inline-block;
+              padding: 3px;
+              transform: rotate(45deg);
+              -webkit-transform: rotate(45deg);
+            }
+          
           }
+
+          .item-checkbox {
+            width: 25px;
+            height: 25px;
+          }
+  
+          .item-text {
+            width: 300px;
+            text-align: start;
+          }
+
         }
+
+        .JobItem-Detail {
+          width: 100%;
+          height: auto;
+          border: 1px solid #000000;
+          
+        }
+
+        
+        
+        // .item-delete-button {
+        //   background-color: #E74C3C ;
+        //   color: #ffffff;
+        //   border: 1px solid #ffffff;
+        //   border-radius: 5px;
+        //   width: 50px;
+        //   height: 30px;
+        //   cursor: pointer;
+        //   &:hover {
+        //     background-color: #C0392B;
+        //   }
+        // }
 
       }
 
