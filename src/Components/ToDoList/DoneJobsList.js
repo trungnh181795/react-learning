@@ -4,6 +4,7 @@ import JobItem from "./JobItem";
 const DoneJobsList = (props) => {
     const tasks = props.jobs;
     const doneTasks = tasks.filter((task, index) => task.isDone === true )
+    console.log(doneTasks)
 
     const handleDelete = (job) => {
         props.clearJobDone(job);
@@ -14,13 +15,13 @@ const DoneJobsList = (props) => {
     return (
         <ul className='JobsList'>
             <div className="JobsHeader">Done Task:</div>
-            {tasks.length ? tasks.map((job, index) => 
+            {doneTasks.length ? doneTasks.map((job, index) => 
                 <JobItem 
                     job={job} 
                     key={index}
                     onDelete={handleDelete}
                 />
-            ) : <p>There's nothing to show yet!</p>}
+            ) : <p>No task done!</p>}
         </ul>
     )
 
