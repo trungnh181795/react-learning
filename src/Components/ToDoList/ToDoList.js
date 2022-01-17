@@ -19,8 +19,9 @@ const ToDoList = () => {
         return result ?? []
     });
 
-
-    console.log(jobs)
+    const [doneJobs, setDoneJobs] = useState(() => {
+        return jobs.filter((job) => job.isDone === true)
+    })
 
     const createNewJob = (job) => {
         if(job.title !== '') {
@@ -45,6 +46,14 @@ const ToDoList = () => {
         })
     }
 
+    const changeJobStatus = (job) => {
+        console.log('change',job)
+        job.isDone = !job.isDone;
+        console.log('afterchange',job)
+    }
+
+    console.log(jobs)
+
     return (
         <div className='ToDoList'>
 
@@ -52,10 +61,12 @@ const ToDoList = () => {
             <UndoneJobsList 
                 jobs={jobs}
                 clearJobDone={removeJobFromList}
+                handleJobDone={changeJobStatus}
             />
             <DoneJobsList   
-                jobs={jobs}
+                jobs={doneJobs}
                 clearJobDone={removeJobFromList}
+                handleJobDone={changeJobStatus}
             />
         </div>
     )

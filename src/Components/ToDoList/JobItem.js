@@ -4,29 +4,21 @@ import JobItemDetail from './JobItemDetail'
 
 const JobItem = (props) => {
 
-    const [task, setTask] = useState(props.job)
-
     const [showDetail, setShowDetail] = useState(false);
 
     const handleCheckBoxChange = () => {
-        setTask((prev) => {
-            let currentTask = {...prev};
-            currentTask.isDone = !currentTask.isDone;
-
-            return currentTask
-        })
-        
+        props.onDone(props.job)
     }
 
     const handleButtonOnClick = (e) => {
-        props.onDelete(task) 
+        props.onDelete(props.job) 
     }
 
     const handleSetShowDetail = (e) => {
         setShowDetail(!showDetail);
         console.log(e.target)
     }
-    console.log('called in JobItem', task)
+    console.log('called in JobItem', props.job)
 
     return (
         <li className='JobItem'>
@@ -40,14 +32,14 @@ const JobItem = (props) => {
                 <input
                     className='item-checkbox me-2'
                     type='checkbox'
-                    checked={task.isDone}
+                    checked={props.job.isDone}
                     onChange={handleCheckBoxChange}
                 />
                 <div 
                     className='item-text me-2'
-                    style={{'textDecoration': task.isDone ? 'line-through' : 'none'}}
+                    style={{'textDecoration': props.job.isDone ? 'line-through' : 'none'}}
                 >
-                    {task.title}
+                    {props.job.title}
                 </div>
                 <button 
                     className='btn btn-danger item-delete-button'
@@ -57,7 +49,7 @@ const JobItem = (props) => {
                     Delete
                 </button>
             </div>
-            {showDetail && <JobItemDetail job={task} />}
+            {showDetail && <JobItemDetail job={props.job} />}
         </li>
     )
 

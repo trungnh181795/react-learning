@@ -19,6 +19,9 @@ const Header = () => {
                 <li className='navbar-list-item'>
                     <Link to="/todolist">To-do list</Link>
                 </li>
+                <li className='navbar-list-item'>
+                    <Link to="/use-effect">Use Effect</Link>
+                </li>
             </ul>
         </nav>
     )

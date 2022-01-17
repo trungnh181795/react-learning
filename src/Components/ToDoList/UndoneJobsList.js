@@ -11,6 +11,9 @@ const UndoneJobsList = (props) => {
         console.log(job)
     }
 
+    const handleJobDone = (job) => {
+        props.handleJobDone(job)
+    }
     
     return (
         <ul className='JobsList mb-2'>
@@ -20,6 +23,7 @@ const UndoneJobsList = (props) => {
                     job={job} 
                     key={index}
                     onDelete={handleDelete}
+                    onDone={handleJobDone}
                 />
             ) : <p>There's nothing to show yet!</p>}
         </ul>
