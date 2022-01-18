@@ -49,27 +49,33 @@ const ToDoList = () => {
     const changeJobStatus = (jobId) => {
         setJobs((prev) => {
             let currentJobs = [...prev];
-            console.log('currentJobs after destructuring:', currentJobs)
+            console.log(currentJobs)
             
             let statusChangedJob = currentJobs.find((job) => job.id === jobId );
-            console.log('before change', statusChangedJob)
-            console.log('this is isDone of the job found befor change:', statusChangedJob.isDone)
+            // console.log('before change', statusChangedJob)
+            // console.log('this is isDone of the job found befor change:', statusChangedJob.isDone)
 
             statusChangedJob.isDone = !statusChangedJob.isDone;
-            console.log('after changed', statusChangedJob);
-            console.log('this is isDone of the job found after changed:', statusChangedJob.isDone);
+            // console.log('after changed', statusChangedJob);
+            // console.log('this is isDone of the job found after changed:', statusChangedJob.isDone);
             
-            console.log('new arr', currentJobs);
+            // console.log('new arr', currentJobs);
 
 
             localStorage.setItem('toDoList', JSON.stringify(currentJobs))
+            // return [...prev].map((e) => {
+            //     console.log('before', e.isDone)
+            //     e.isDone = !e.isDone;
+            //     console.log('after', e.isDone)
+            //     return e
+            // })
 
             return currentJobs
         })
     }
 
-    console.log('rerendered')
-    console.log('all jobs:', jobs)
+    // console.log('rerendered')
+    // console.log('all jobs:', jobs)
 
     return (
         <div className='ToDoList'>

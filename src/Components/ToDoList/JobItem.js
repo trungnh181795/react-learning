@@ -31,7 +31,7 @@ const JobItem = (props) => {
                 <input
                     className='item-checkbox me-2'
                     type='checkbox'
-                    // checked={props.job.isDone}
+                    checked={props.job.isDone}
                     onChange={handleCheckBoxChange}
                 />
                 <div 
