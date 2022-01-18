@@ -58,6 +58,7 @@ const ToDoList = () => {
             statusChangedJob.isDone = !statusChangedJob.isDone;
             console.log('after changed', statusChangedJob);
             console.log('this is isDone of the job found after changed:', statusChangedJob.isDone);
+            console.log('log 1 more time to make sure:', statusChangedJob)
             
             console.log('new arr', currentJobs);
 
