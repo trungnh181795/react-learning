@@ -4,6 +4,7 @@ import React, {useState} from "react";
 const JobInput = (props) => {
 
     const [inputJob, setInputJob] = useState({
+        id: '',
         title: '',
         detail: '',
         day: '',
@@ -28,12 +29,24 @@ const JobInput = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let {createdAt: {createdDay, createdTime},...keys} = inputJob;
+        let {id, createdAt: {createdDay, createdTime},...keys} = inputJob;
         createdDay = new Date().toLocaleDateString();
         createdTime = new Date().toLocaleTimeString();
-        console.log('createdTime', createdTime)
-        props.submitNewJob({...keys, createdAt: {createdDay, createdTime}})
-        
+        id = Math.random().toString();
+
+        props.submitNewJob({id, ...keys, createdAt: {createdDay, createdTime}})
+        setInputJob({
+            id: '',
+            title: '',
+            detail: '',
+            day: '',
+            time: '',
+            isDone: false,
+            createdAt: {
+                createdDay: '',
+                createdTime: ''
+            }
+        })
     }
 
     return (

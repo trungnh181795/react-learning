@@ -4,7 +4,7 @@ import JobItem from "./JobItem";
 const DoneJobsList = (props) => {
     const tasks = props.jobs;
     const doneTasks = tasks.filter((task, index) => task.isDone === true )
-    console.log(doneTasks)
+    // console.log(doneTasks)
 
     const handleDelete = (job) => {
         props.clearJobDone(job);

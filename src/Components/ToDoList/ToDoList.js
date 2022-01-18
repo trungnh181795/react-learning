@@ -19,9 +19,9 @@ const ToDoList = () => {
         return result ?? []
     });
 
-    const [doneJobs, setDoneJobs] = useState(() => {
-        return jobs.filter((job) => job.isDone === true)
-    })
+    // const [doneJobs, setDoneJobs] = useState(() => {
+    //     return jobs.filter((job) => job.isDone === true)
+    // })
 
     const createNewJob = (job) => {
         if(job.title !== '') {
@@ -46,13 +46,30 @@ const ToDoList = () => {
         })
     }
 
-    const changeJobStatus = (job) => {
-        console.log('change',job)
-        job.isDone = !job.isDone;
-        console.log('afterchange',job)
+    const changeJobStatus = (jobId) => {
+        setJobs((prev) => {
+            let currentJobs = [...prev];
+            console.log('currentJobs after destructuring:', currentJobs)
+            
+            let statusChangedJob = currentJobs.find((job) => job.id === jobId );
+            console.log('before change', statusChangedJob)
+            console.log('this is isDone of the job found befor change:', statusChangedJob.isDone)
+
+            statusChangedJob.isDone = !statusChangedJob.isDone;
+            console.log('after changed', statusChangedJob);
+            console.log('this is isDone of the job found after changed:', statusChangedJob.isDone);
+            
+            console.log('new arr', currentJobs);
+
+
+            localStorage.setItem('toDoList', JSON.stringify(currentJobs))
+
+            return currentJobs
+        })
     }
 
-    console.log(jobs)
+    console.log('rerendered')
+    console.log('all jobs:', jobs)
 
     return (
         <div className='ToDoList'>
@@ -63,11 +80,11 @@ const ToDoList = () => {
                 clearJobDone={removeJobFromList}
                 handleJobDone={changeJobStatus}
             />
-            <DoneJobsList   
+            {/* <DoneJobsList   
                 jobs={doneJobs}
                 clearJobDone={removeJobFromList}
                 handleJobDone={changeJobStatus}
-            />
+            /> */}
         </div>
     )
 }

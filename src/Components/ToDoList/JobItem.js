@@ -7,7 +7,8 @@ const JobItem = (props) => {
     const [showDetail, setShowDetail] = useState(false);
 
     const handleCheckBoxChange = () => {
-        props.onDone(props.job)
+        console.log('this ID is passed from JobItem:', props.job.id)
+        props.onDone(props.job.id)
     }
 
     const handleButtonOnClick = (e) => {
@@ -16,9 +17,7 @@ const JobItem = (props) => {
 
     const handleSetShowDetail = (e) => {
         setShowDetail(!showDetail);
-        console.log(e.target)
     }
-    console.log('called in JobItem', props.job)
 
     return (
         <li className='JobItem'>
@@ -32,7 +31,7 @@ const JobItem = (props) => {
                 <input
                     className='item-checkbox me-2'
                     type='checkbox'
-                    checked={props.job.isDone}
+                    // checked={props.job.isDone}
                     onChange={handleCheckBoxChange}
                 />
                 <div 
