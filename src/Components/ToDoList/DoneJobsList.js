@@ -2,15 +2,17 @@ import React from "react";
 import JobItem from "./JobItem";
 
 const DoneJobsList = (props) => {
-    const tasks = props.jobs;
-    const doneTasks = tasks.filter((task, index) => task.isDone === true )
-    // console.log(doneTasks)
+   
+    const doneTasks = [...props.jobs].filter((task) => task.isDone === true);
 
     const handleDelete = (job) => {
         props.clearJobDone(job);
         console.log(job)
     }
 
+    const handleJobDone = (jobId, e) => {
+        props.handleJobDone(jobId, e)
+    }
     
     return (
         <ul className='JobsList'>
@@ -20,6 +22,7 @@ const DoneJobsList = (props) => {
                     job={job} 
                     key={index}
                     onDelete={handleDelete}
+                    onDone={handleJobDone}
                 />
             ) : <p>No task done!</p>}
         </ul>

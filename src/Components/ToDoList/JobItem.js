@@ -5,10 +5,12 @@ import JobItemDetail from './JobItemDetail'
 const JobItem = (props) => {
 
     const [showDetail, setShowDetail] = useState(false);
+    const [isChecked, setIsChecked] = useState(props.job.isDone);
 
-    const handleCheckBoxChange = () => {
+    const handleCheckBoxChange = (e) => {
         console.log('this ID is passed from JobItem:', props.job.id)
-        props.onDone(props.job.id)
+        setIsChecked(!isChecked)
+        props.onDone(props.job.id, e)
     }
 
     const handleButtonOnClick = (e) => {
@@ -31,7 +33,7 @@ const JobItem = (props) => {
                 <input
                     className='item-checkbox me-2'
                     type='checkbox'
-                    // checked={props.job.isDone}
+                    checked={isChecked}
                     onChange={handleCheckBoxChange}
                 />
                 <div 
