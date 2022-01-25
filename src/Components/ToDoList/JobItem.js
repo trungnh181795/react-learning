@@ -1,20 +1,22 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 
-import JobItemDetail from './JobItemDetail'
+import JobItemDetail from './JobItemDetail';
+import { ToDoListContext } from './ToDoList';
 
 const JobItem = (props) => {
 
     const [showDetail, setShowDetail] = useState(false);
-    const [isChecked, setIsChecked] = useState(props.job.isDone);
+    // const [isChecked, setIsChecked] = useState(props.job.isDone);
+
+    const { changeJobStatus, removeJobFromList } = useContext(ToDoListContext);
 
     const handleCheckBoxChange = (e) => {
-        console.log('this ID is passed from JobItem:', props.job.id)
-        setIsChecked(!isChecked)
-        props.onDone(props.job.id, e)
+        // setIsChecked(!isChecked)
+        changeJobStatus(props.job.id, e)
     }
 
-    const handleButtonOnClick = (e) => {
-        props.onDelete(props.job) 
+    const handleDelele = () => {
+        removeJobFromList(props.job);
     }
 
     const handleSetShowDetail = (e) => {
@@ -33,7 +35,7 @@ const JobItem = (props) => {
                 <input
                     className='item-checkbox me-2'
                     type='checkbox'
-                    checked={isChecked}
+                    checked={props.job.isDone}
                     onChange={handleCheckBoxChange}
                 />
                 <div 
@@ -45,7 +47,7 @@ const JobItem = (props) => {
                 <button 
                     className='btn btn-danger item-delete-button'
                     type="button"
-                    onClick={handleButtonOnClick}
+                    onClick={handleDelele}
                 >
                     Delete
                 </button>

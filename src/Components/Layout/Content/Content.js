@@ -5,6 +5,7 @@ import Calculator from '../../Calculator';
 import ToDoList from '../../ToDoList';
 import Clock from '../../Clock';
 import UseEffect from '../../UseEffect';
+import ToDoAppReducer from '../../ToDoAppReducer';
 import './Content.scss';
 
 
@@ -20,6 +21,7 @@ const Content = () => {
                 <Route path="/calculator" element={<Calculator />} />
                 <Route path="/todolist" element={<ToDoList />} />
                 <Route path="/use-effect" element={<UseEffect />} />
+                <Route path="/reducer" element={<ToDoAppReducer />} />
             </Routes>
       </div>
     )

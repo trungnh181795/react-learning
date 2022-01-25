@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import { createContext } from 'react';
 
 import UndoneJobsList from './UndoneJobsList';
 import DoneJobsList from './DoneJobsList';
 import JobInput from './JobInput';
 
 import './ToDoList.scss';
+
+export const ToDoListContext = createContext()
 
 const ToDoList = () => {
 
@@ -69,20 +72,22 @@ const ToDoList = () => {
     console.log('all jobs:', jobs)
 
     return (
-        <div className='ToDoList'>
+        <ToDoListContext.Provider value={{changeJobStatus, removeJobFromList}}>
+            <div className='ToDoList'>
 
-            <JobInput submitNewJob={createNewJob}/>
-            <UndoneJobsList 
-                jobs={jobs}
-                clearJobDone={removeJobFromList}
-                handleJobDone={changeJobStatus}
-            />
-            <DoneJobsList   
-                jobs={jobs}
-                clearJobDone={removeJobFromList}
-                handleJobDone={changeJobStatus}
-            />
-        </div>
+                <JobInput submitNewJob={createNewJob}/>
+                <UndoneJobsList 
+                    jobs={jobs}
+                    clearJobDone={removeJobFromList}
+                    handleJobDone={changeJobStatus}
+                />
+                <DoneJobsList   
+                    jobs={jobs}
+                    clearJobDone={removeJobFromList}
+                    handleJobDone={changeJobStatus}
+                />
+            </div>
+        </ToDoListContext.Provider>
     )
 }
 

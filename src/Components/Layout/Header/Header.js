@@ -22,6 +22,9 @@ const Header = () => {
                 <li className='navbar-list-item'>
                     <Link to="/use-effect">Use Effect</Link>
                 </li>
+                <li className='navbar-list-item'>
+                    <Link to="/reducer">Use Reducer</Link>
+                </li>
             </ul>
         </nav>
     )

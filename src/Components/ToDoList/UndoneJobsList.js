@@ -5,14 +5,14 @@ const UndoneJobsList = (props) => {
 
     const undoneTasks = [...props.jobs].filter((task) => task.isDone === false)
 
-    const handleDelete = (job) => {
-        props.clearJobDone(job);
-        console.log(job)
-    }
+    // const handleDelete = (job) => {
+    //     props.clearJobDone(job);
+    //     console.log(job)
+    // }
 
-    const handleJobDone = (jobId, e) => {
-        props.handleJobDone(jobId, e)
-    }
+    // const handleJobDone = (jobId, e) => {
+    //     props.handleJobDone(jobId, e)
+    // }
     
     return (
         <ul className='JobsList mb-2'>
@@ -21,8 +21,8 @@ const UndoneJobsList = (props) => {
                 <JobItem 
                     job={job} 
                     key={job.id}
-                    onDelete={handleDelete}
-                    onDone={handleJobDone}
+                    // onDelete={handleDelete}
+                    // onDone={handleJobDone}
                 />
             ) : <p>There's nothing to show yet!</p>}
         </ul>
