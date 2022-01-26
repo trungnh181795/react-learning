@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { createContext } from 'react';
 
+import { useStore } from './store';
 import UndoneJobsList from './UndoneJobsList';
 import DoneJobsList from './DoneJobsList';
 import JobInput from './JobInput';
@@ -10,6 +11,8 @@ import './ToDoList.scss';
 export const ToDoListContext = createContext()
 
 const ToDoList = () => {
+
+    const [state, dispatch] = useStore();
 
     useEffect(() => {
         document.title = 'To-do List';
