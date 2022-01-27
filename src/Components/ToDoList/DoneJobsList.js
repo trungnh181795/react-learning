@@ -1,28 +1,23 @@
 import React from "react";
+
+import { useStore } from './store';
 import JobItem from "./JobItem";
 
-const DoneJobsList = (props) => {
-   
-    const doneTasks = [...props.jobs].filter((task) => task.isDone === true);
+const DoneJobsList = () => {
+    
+    const [state, dispatch] = useStore();
+    
+    const { tasks, inputTask } = state;
 
-    // const handleDelete = (job) => {
-    //     props.clearJobDone(job);
-    //     console.log(job)
-    // }
-
-    // const handleJobDone = (jobId, e) => {
-    //     props.handleJobDone(jobId, e)
-    // }
+    const doneTasks = tasks.filter((task) => task.isDone === true);
     
     return (
         <ul className='JobsList'>
             <div className="JobsHeader">Done Task:</div>
-            {doneTasks.length ? doneTasks.map((job, index) => 
+            {doneTasks.length ? doneTasks.map((task) => 
                 <JobItem 
-                    job={job} 
-                    key={index}
-                    // onDelete={handleDelete}
-                    // onDone={handleJobDone}
+                    task={task} 
+                    key={task.id}
                 />
             ) : <p>No task done!</p>}
         </ul>

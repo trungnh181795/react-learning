@@ -1,28 +1,24 @@
 import React from 'react';
+
 import JobItem from './JobItem';
+import { useStore } from './store';
 
-const UndoneJobsList = (props) => {
+const UndoneJobsList = () => {
 
-    const undoneTasks = [...props.jobs].filter((task) => task.isDone === false)
+    const [state, dispatch] = useStore();
+    console.log(state)
 
-    // const handleDelete = (job) => {
-    //     props.clearJobDone(job);
-    //     console.log(job)
-    // }
+    const { tasks, inputTask } = state;
 
-    // const handleJobDone = (jobId, e) => {
-    //     props.handleJobDone(jobId, e)
-    // }
-    
+    const undoneTasks = tasks.filter((task) => task.isDone === false)
+
     return (
         <ul className='JobsList mb-2'>
             <div className="JobsHeader">Tasks:</div>
-            {undoneTasks.length > 0 ? undoneTasks.map((job) => 
+            {undoneTasks.length > 0 ? undoneTasks.map((task) => 
                 <JobItem 
-                    job={job} 
-                    key={job.id}
-                    // onDelete={handleDelete}
-                    // onDone={handleJobDone}
+                    task={task} 
+                    key={task.id}
                 />
             ) : <p>There's nothing to show yet!</p>}
         </ul>

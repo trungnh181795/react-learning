@@ -1,22 +1,29 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
+import { useStore } from './store';
+import {
+    deleteTask,
+    changeTaskStatus
+} from './store/actions';
 import JobItemDetail from './JobItemDetail';
-import { ToDoListContext } from './ToDoList';
 
 const JobItem = (props) => {
 
     const [showDetail, setShowDetail] = useState(false);
-    // const [isChecked, setIsChecked] = useState(props.job.isDone);
+    const [state, dispatch] = useStore();
 
-    const { changeJobStatus, removeJobFromList } = useContext(ToDoListContext);
 
     const handleCheckBoxChange = (e) => {
-        // setIsChecked(!isChecked)
-        changeJobStatus(props.job.id, e)
+        let isChecked = e.target.checked;
+        let taskId = props.task.id;
+        dispatch(changeTaskStatus({
+            taskId,
+            isChecked
+        }));
     }
 
     const handleDelele = () => {
-        removeJobFromList(props.job);
+        dispatch(deleteTask(props.task.id));
     }
 
     const handleSetShowDetail = (e) => {
@@ -35,14 +42,14 @@ const JobItem = (props) => {
                 <input
                     className='item-checkbox me-2'
                     type='checkbox'
-                    checked={props.job.isDone}
+                    checked={props.task.isDone}
                     onChange={handleCheckBoxChange}
                 />
                 <div 
                     className='item-text me-2'
-                    style={{'textDecoration': props.job.isDone ? 'line-through' : 'none'}}
+                    style={{'textDecoration': props.task.isDone ? 'line-through' : 'none'}}
                 >
-                    {props.job.title}
+                    {props.task.title}
                 </div>
                 <button 
                     className='btn btn-danger item-delete-button'

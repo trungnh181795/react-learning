@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+
 
 const JobItemDetail = (props) => {
     const {detail, createdAt: {createdDay, createdTime},...keys} = props.job;

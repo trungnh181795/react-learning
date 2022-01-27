@@ -1,52 +1,34 @@
-import React, {useState} from "react";
+import { useRef } from 'react';
+
+import { useStore } from './store'
+import {
+    setInputTask,
+    addTask
+} from './store/actions';
 
 
-const JobInput = (props) => {
+const JobInput = () => {
 
-    const [inputJob, setInputJob] = useState({
-        id: '',
-        title: '',
-        detail: '',
-        day: '',
-        time: '',
-        isDone: false,
-        createdAt: {
-            createdDay: '',
-            createdTime: ''
-        }
-    });
+    const titleInputRef = useRef();
+
+    const [state, dispatch] = useStore();
+
+    const inputTask = state.inputTask;
 
     const handleInputChange = (e) => {
         let inputValue = e.target.value;
         let inputName = e.target.name;
-        setInputJob((prev) => {
-            let currentInputJob = {...prev};
-            currentInputJob[inputName] = inputValue;
-            return currentInputJob
-        })
+        dispatch(setInputTask({
+            inputValue,
+            inputName
+        }))
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let {id, createdAt: {createdDay, createdTime},...keys} = inputJob;
-        createdDay = new Date().toLocaleDateString();
-        createdTime = new Date().toLocaleTimeString();
-        id = Math.random().toString();
-
-        props.submitNewJob({id, ...keys, createdAt: {createdDay, createdTime}})
-        setInputJob({
-            id: '',
-            title: '',
-            detail: '',
-            day: '',
-            time: '',
-            isDone: false,
-            createdAt: {
-                createdDay: '',
-                createdTime: ''
-            }
-        })
+        dispatch(addTask(inputTask));
+        titleInputRef.current.focus();
     }
 
     return (
@@ -67,8 +49,9 @@ const JobInput = (props) => {
                                 type="text" 
                                 id="Title" 
                                 name="title" 
-                                value={inputJob.title}
+                                value={inputTask.title}
                                 onChange={handleInputChange}
+                                ref={titleInputRef}
                                 required
                             /><br/>
                         </div>
@@ -86,7 +69,7 @@ const JobInput = (props) => {
                                 type="text" 
                                 id="Detail" 
                                 name="detail" 
-                                value={inputJob.detail}
+                                value={inputTask.detail}
                                 style={{resize: 'none'}}
                                 onChange={handleInputChange} 
                             /><br/>
@@ -105,7 +88,7 @@ const JobInput = (props) => {
                                 type="date" 
                                 id="Day" 
                                 name="day"  
-                                value={inputJob.day}  
+                                value={inputTask.day}  
                                 onChange={handleInputChange}       
                             /><br/>
                         </div>
@@ -121,7 +104,7 @@ const JobInput = (props) => {
                                 type="time" 
                                 id="Time" 
                                 name="time"  
-                                value={inputJob.time}      
+                                value={inputTask.time}      
                                 onChange={handleInputChange}
                             /><br/>
                         </div>
